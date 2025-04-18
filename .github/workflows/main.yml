@@ -1,0 +1,35 @@
+
+name: Sub - main
+
+on:
+  push:
+
+jobs:
+
+  build-image:
+    runs-on: ubuntu-latest
+    needs: []
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Build image
+        run:
+          make image
+
+      - name: Run tests
+        run:
+          make tests
+
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
+
+      - name: Publish image on dockerhub
+        run: |
+          SHA=${{ github.sha }}
+          TAG="${SHA:0:7}"
+          docker push cyberdojo/asset_builder:${TAG}
+
