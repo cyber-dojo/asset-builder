@@ -1,6 +1,0 @@
-
-DONE Move source/app/assets/stylesheets/ dir into its own dir in test
-DONE Volume mount the source/app/assets/stylesheets dir in docker-compose.yml to make more realistic example
-DONE Use this example in test/run.sh
-DONE Add github/workflow to push image to dockerhub
-
