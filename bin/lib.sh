@@ -35,9 +35,14 @@ exit_non_zero_unless_installed()
   do
     if ! installed "${dependent}" ; then
       stderr "${dependent} is not installed!"
-      exit 42
+      exit_non_zero
     fi
   done
+}
+
+exit_non_zero()
+{
+  kill -INT $$
 }
 
 installed()
