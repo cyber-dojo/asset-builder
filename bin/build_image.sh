@@ -18,7 +18,7 @@ build_image()
     echo "ERROR: unexpected env-var inside image ${image_name}"
     echo "expected: 'SHA=${COMMIT_SHA}'"
     echo "  actual: 'SHA=${sha_in_image}'"
-    exit 42
+    exit_non_zero
   fi
 }
 

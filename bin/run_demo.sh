@@ -42,7 +42,7 @@ curl_text_body_200()
   else
     echo "FAILED: GET ${route}"
     cat "$(log_filename)"
-    exit 42
+    exit_non_zero
   fi
 }
 
