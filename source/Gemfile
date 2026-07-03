@@ -1,0 +1,14 @@
+source 'https://rubygems.org'
+
+# asset-builder compiles the SCSS/JS assets (see app/app_base.rb and
+# config/compile.sh), so it owns the compilation gems directly rather than
+# relying on them being present in the base image:
+#   sprockets  - the asset pipeline
+#   uglifier   - JS compressor, run through mini_racer's V8 runtime
+#   mini_racer - V8 JavaScript engine used by uglifier (no node binary in image)
+#   sass/sassc - SCSS compilation and the :sassc css_compressor
+gem 'sprockets'
+gem 'uglifier'
+gem 'mini_racer'
+gem 'sass'
+gem 'sassc'
