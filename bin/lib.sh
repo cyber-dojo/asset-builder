@@ -40,9 +40,14 @@ exit_non_zero_unless_installed()
   done
 }
 
+# Ends the script, non-zero. Not kill -INT $$: a signal is a request, and
+# test/run_tests.sh and bin/make_expected.sh trap INT to remove a temp dir.
+# Those handlers do not exit, so bash ran the handler and then carried on from
+# the next statement - a guard reporting a problem left the script running and
+# exiting 0. exit cannot be declined; the EXIT trap still runs the cleanup.
 exit_non_zero()
 {
-  kill -INT $$
+  exit 42
 }
 
 installed()
