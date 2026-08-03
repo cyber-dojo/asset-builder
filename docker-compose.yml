@@ -3,6 +3,10 @@ services:
 
   asset_builder:
     image: ${CYBER_DOJO_ASSET_BUILDER_IMAGE}:${CYBER_DOJO_ASSET_BUILDER_TAG}
+    # Always amd64, whatever the host is. Every consumer pins this image by tag
+    # in its own Dockerfile, so an arm64 build here takes the published tag's
+    # place locally and their builds then fail to find a platform they can use.
+    platform: linux/amd64
     user: nobody
     build:
       args:
