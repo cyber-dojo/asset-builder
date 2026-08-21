@@ -20,6 +20,10 @@ build_image()
     echo "  actual: 'SHA=${sha_in_image}'"
     exit_non_zero
   fi
+
+  # After the build, so removing an earlier build's tags takes its last tag
+  # with them and the image itself goes.
+  remove_old_images
 }
 
 build_image "$@"
