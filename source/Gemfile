@@ -6,9 +6,9 @@ source 'https://rubygems.org'
 #   sprockets  - the asset pipeline
 #   uglifier   - JS compressor, run through mini_racer's V8 runtime
 #   mini_racer - V8 JavaScript engine used by uglifier (no node binary in image)
-#   sass/sassc - SCSS compilation and the :sassc css_compressor
+#   sassc-embedded - the sassc API that Sprockets' SCSS processor and :sassc
+#                    css_compressor call, rendered by Dart Sass (sass-embedded)
 gem 'sprockets'
 gem 'uglifier'
 gem 'mini_racer'
-gem 'sass'
-gem 'sassc'
+gem 'sassc-embedded'
