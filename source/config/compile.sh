@@ -10,6 +10,7 @@ mkdir --parents "${OUT_DIR}"
 export OUT_DIR
 
 ruby << 'RUBY'
+require 'sassc-embedded'
 require 'sprockets'
 require 'uglifier'
 

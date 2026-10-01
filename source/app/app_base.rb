@@ -6,6 +6,7 @@ require_relative 'silently'
 require 'sinatra/base'
 silently { require 'sinatra/contrib' } # N x "warning: method redefined"
 require 'json'
+require 'sassc-embedded'
 require 'sprockets'
 require 'uglifier'
 
@@ -15,7 +16,7 @@ class AppBase < Sinatra::Base
     super(nil)
   end
 
-  silently { register Sinatra::Contrib }
+  register Sinatra::Contrib
   set :port, ENV.fetch('PORT', nil)
   set :environment, Sprockets::Environment.new
 
