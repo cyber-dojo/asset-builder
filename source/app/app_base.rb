@@ -2,9 +2,7 @@
 
 require 'English'
 
-require_relative 'silently'
 require 'sinatra/base'
-silently { require 'sinatra/contrib' } # N x "warning: method redefined"
 require 'json'
 require 'sassc-embedded'
 require 'sprockets'
@@ -16,7 +14,6 @@ class AppBase < Sinatra::Base
     super(nil)
   end
 
-  register Sinatra::Contrib
   set :port, ENV.fetch('PORT', nil)
   set :environment, Sprockets::Environment.new
 
@@ -24,35 +21,23 @@ class AppBase < Sinatra::Base
   environment.css_compressor = :sassc
 
   get '/assets/app.css', provides: [:css] do
-    respond_to do |format|
-      format.css do
-        env['PATH_INFO'].sub!('/assets', '')
-        settings.environment.call(env)
-      end
-    end
+    env['PATH_INFO'].sub!('/assets', '')
+    settings.environment.call(env)
   end
 
   environment.append_path('app/assets/javascripts')
   environment.js_compressor = Uglifier.new(harmony: true)
 
   get '/assets/app.js', provides: [:js] do
-    respond_to do |format|
-      format.js do
-        env['PATH_INFO'].sub!('/assets', '')
-        settings.environment.call(env)
-      end
-    end
+    env['PATH_INFO'].sub!('/assets', '')
+    settings.environment.call(env)
   end
 
   def self.get_delegate(klass, name)
     get "/#{name}", provides: [:json] do
-      respond_to do |format|
-        format.json do
-          target = klass.new(@externals)
-          result = target.public_send(name, params)
-          json({ name => result })
-        end
-      end
+      target = klass.new(@externals)
+      result = target.public_send(name, params)
+      JSON.generate({ name => result })
     end
   end
 
