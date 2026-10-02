@@ -1,4 +1,4 @@
-Many cyber-dojo microservice docker images (eg saver, differ) need compiled CSS/JS.
+Some cyber-dojo microservice docker images (creator, dashboard, web) need compiled CSS/JS.
 Compiling it inside each image pulled SCSS/JS gems into their sinatra base image,
 and snyk vulnerabilities piled up there.
 
